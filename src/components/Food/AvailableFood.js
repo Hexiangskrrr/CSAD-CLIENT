@@ -6,7 +6,7 @@ import  {  useState  } from 'react'
 import DUMMY_FOOD from "./DUMMY_FOOD" // to be replaced with real data
 
 
-const selections = ["Seasonal", "Drinks", "Dessert"]
+const selections = ["Drinks", "Dessert", "Seasonal", "Set Meal"]
 
 
 
@@ -36,7 +36,8 @@ const AvailableFood = () => {
       id  = {food.id}
       name = {food.name}
       price = {food.price}
-      description = {food.category}
+      description = {food.description}
+      category = {food.category}
     />
 
   ))
