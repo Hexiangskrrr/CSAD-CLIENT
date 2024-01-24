@@ -2,8 +2,9 @@ import React from 'react'
 import './App.css'
 import AvailableFood from './components/Food/AvailableFood'
 import Header from './components/Layout/Header/Header'
+
+
 import { CartProvider } from 'react-use-cart'
-import Order from './components/Order/Order'
 
 
 

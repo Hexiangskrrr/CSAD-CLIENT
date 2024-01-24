@@ -5,10 +5,7 @@ const Order = () => {
   const {
     isEmpty,
     items,
-    totalItems,
     updateItemQuantity,
-    removeItem,
-    emptyCart,
   } = useCart()
 
   if (isEmpty) return <p>View menu to add order!</p>;

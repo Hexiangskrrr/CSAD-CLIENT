@@ -12,7 +12,7 @@ const FoodItem = (props) => {
     <div className={styles.card}>
       <h3>{props.name}</h3>
       <p>{props.description}</p>
-      <p className={styles.price}>{props.price}</p>
+      <p className={styles.price}>${props.price}</p>
       <button onClick={() => addItem(props)}>Add to order</button>
     </div>
   )
