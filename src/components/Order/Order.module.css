@@ -1,0 +1,22 @@
+.orderItem {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  width: auto;
+}
+
+.orderItem div {
+  display: flex;
+  justify-content: center;
+}
+
+.orderItem button {
+  margin: 0 5px;
+}
+
+.orderItem p {
+  display: inline-block;
+  margin: 0 5px;
+  font-weight: bold;
+}

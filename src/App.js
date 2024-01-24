@@ -1,4 +1,39 @@
 import React from 'react'
+import './App.css'
+import AvailableFood from './components/Food/AvailableFood'
+import Header from './components/Layout/Header/Header'
+import { CartProvider } from 'react-use-cart'
+import Order from './components/Order/Order'
+
+
+
+
+
+function App() {
+
+  return(
+    <CartProvider>
+    <div>
+      <div id='header'><Header/></div>
+      <div id='availablefood'><AvailableFood/></div>
+    </div>
+    </CartProvider>
+  )
+}
+
+
+export default App
+
+
+
+
+
+
+
+
+
+/*
+import React from 'react'
 import { useEffect, useState } from 'react'
 
 function App() {
@@ -30,4 +65,6 @@ function App() {
   )
 }
 
+
 export default App
+*/
