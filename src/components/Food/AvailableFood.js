@@ -10,13 +10,15 @@ const AvailableFood = () => {
 
   const selections = ["Drinks", "Dessert", "Seasonal", "Set Meal"]
 
+  const SERVER_URL = 'http://localhost:5003'
+
   useEffect(() => {
-    axios.get('menu')
+    axios.get(`${SERVER_URL}/menu`)
       .then(response => {
         setFoodList(response.data);
       })
       .catch(error => {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching data:", error)
       });
   }, []);
 

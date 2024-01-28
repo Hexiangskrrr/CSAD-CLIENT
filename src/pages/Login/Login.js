@@ -3,6 +3,8 @@ import { useState } from 'react';
 import axios from "axios";
 import './Login.css';
 
+
+
 const Login = () => {
   const navigate = useNavigate();
 
@@ -24,9 +26,11 @@ const Login = () => {
     navigate("/menu")
   }
 
+  const SERVER_URL = 'http://localhost:5003'
+
   const handleSignIn = (e) => {
     e.preventDefault()
-    axios.post('/signin', signInData)
+    axios.post(`${SERVER_URL}/signin`, signInData)
       .then(response => {
         if (response.data.authenticated) {
           navigate("/menu");
@@ -41,7 +45,7 @@ const Login = () => {
 
   const handleSignUp = (e) => {
     e.preventDefault()
-    axios.post('/signup', signUpData)
+    axios.post(`${SERVER_URL}/signup`, signUpData)
       .then(response => {
         if (response.data.authenticated) {
           navigate("/menu");
@@ -57,14 +61,14 @@ const Login = () => {
 
   return (
     <div>
-      <div onSubmit={handleSignIn}>
+      <div>
         <button onClick={() => setUserType('existing')}>Sign In</button>
         <button onClick={() => setUserType('new')}>Sign Up</button>
         <button onClick={continueAsGuest}>Continue As Guest</button>
       </div>
 
       {userType === 'existing' && (
-        <form>
+        <form onSubmit={handleSignIn}>
           <div>
             Email: <input type="email" name="email" onChange={(e) => setSignInData({ ...signInData, email: e.target.value })}></input>
           </div>
