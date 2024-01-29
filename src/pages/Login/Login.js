@@ -8,7 +8,11 @@ import './Login.css';
 const Login = () => {
   const navigate = useNavigate();
 
-  const [userType, setUserType] = useState();
+  const [userType, setUserType] = useState()
+  
+  const [signInError, setSignInError] = useState(false)
+  const [signUpError, setSignUpError] = useState(false)
+  
 
   const [signInData, setSignInData] = useState({
     email: '',
@@ -36,10 +40,12 @@ const Login = () => {
           navigate("/menu");
         } else {
           console.error("Authentication failed")
+          setSignInError(true)
         }
       })
       .catch(error => {
         console.error("Error during authentication", error)
+        setSignInError(true)
       });
   }
 
@@ -51,10 +57,12 @@ const Login = () => {
           navigate("/menu");
         } else {
           console.error("Authentication failed")
+          setSignUpError(true)
         }
       })
       .catch(error => {
         console.error("Error during authentication", error)
+        setSignUpError(true)
       });
   }
 
@@ -76,6 +84,7 @@ const Login = () => {
             Password: <input type="password" name="password" onChange={(e) => setSignInData({ ...signInData, password: e.target.value })}></input>
           </div>
           <input type="submit" value={"Sign In"}></input>
+          {signInError && <p>Incorrect email or password</p>}
         </form>
       )}
 
@@ -91,6 +100,7 @@ const Login = () => {
             Password: <input type="password" name="password" onChange={(e) => setSignUpData({ ...signUpData, password: e.target.value })}></input>
           </div>
           <input type="submit" value={"Sign Up"}></input>
+          {signUpError && <p>email already in use</p>}
         </form>
       )}
     </div>
