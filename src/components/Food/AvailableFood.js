@@ -16,6 +16,7 @@ const AvailableFood = () => {
     axios.get(`${SERVER_URL}/menu`)
       .then(response => {
         setFoodList(response.data);
+        console.log(foodList)
       })
       .catch(error => {
         console.error("Error fetching data:", error)
