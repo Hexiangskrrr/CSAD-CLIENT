@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import axios from "axios"
 
-const FoodTable = () => {
+const FoodTable = (props) => {
+
 
   const [foodList, setFoodList] = useState([])
 
@@ -10,7 +11,7 @@ const FoodTable = () => {
   useEffect(() => {
     axios.get(`${SERVER_URL}/menu`)
       .then(response => {
-        setFoodList(response.data);
+        setFoodList(response.data)
         console.log(foodList)
       })
       .catch(error => {
@@ -18,8 +19,22 @@ const FoodTable = () => {
       });
   }, []);
 
-  const edit = (food) => {
-    console.log(food)
+  const onEdit = (food) => {
+    props.func(food)
+  }
+
+  const onDelete = (food) => {
+    axios.delete(`${SERVER_URL}/delete`, food)
+      .then(response => {
+        if (response.data.authenticated) {
+          alert('Item deleted')
+        } else {
+          console.error("Something went wrong")
+        }
+      })
+      .catch(error => {
+        console.error("Error while deleting", error)
+      })
   }
 
 
@@ -30,10 +45,11 @@ const FoodTable = () => {
           <tr>
             <th>Id</th>
             <th>Name</th>
-            <th>Price</th>
+            <th>Price ($)</th>
             <th>Category</th>
             <th>Description</th>
             <th>Edit</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -44,7 +60,8 @@ const FoodTable = () => {
               <td>{food.price}</td>
               <td>{food.category}</td>
               <td>{food.description}</td>
-              <td><button onClick={() => edit(food)}>edit</button></td>
+              <td><button onClick={() => onEdit(food)}>Edit</button></td>
+              <td><button onClick={() => onDelete(food)}>Delete</button></td>
             </tr>
           ))}
         </tbody>

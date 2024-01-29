@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import axios from "axios"
 
-const FoodForm = () => {
+const AddFoodForm = () => {
   const [foodDetails, setFoodDetails] = useState({
     name: '',
-    price: 'Drinks',  //default to Drinks
-    category: '',
+    price: '',  
+    category: 'Drinks',
     description: ''
   });
 
@@ -28,7 +28,7 @@ const FoodForm = () => {
         })
         .catch(error => {
           console.error("Error while adding", error)
-        });
+        })
     } else {
       alert("Please enter a valid price.")
     }
@@ -36,6 +36,7 @@ const FoodForm = () => {
 
   return (
     <div>
+      <h1>Add</h1>
       <form onSubmit={handleSubmit}>
         <br/> 
         Name: <input type="text" onChange={(e) => setFoodDetails({ ...foodDetails, name: e.target.value })}></input>
@@ -52,10 +53,10 @@ const FoodForm = () => {
         <br/>
         Description: <textarea onChange={(e) => setFoodDetails({ ...foodDetails, description: e.target.value })}></textarea>
         <br/>
-        <input type="submit" value={"Add"}></input>
+        <input type="submit" value={'Add'}></input>
       </form>
     </div>
   );
 };
 
-export default FoodForm
+export default AddFoodForm
