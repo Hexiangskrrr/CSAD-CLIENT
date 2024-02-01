@@ -1,6 +1,6 @@
-import FoodItem from "./FoodItem/FoodItem"
+import FoodItem from "../FoodItem/FoodItem"
 import axios from "axios"
-import FoodFilterItem from "./FoodFilter/FoodFilterItem"
+import FoodFilterItem from "../FoodFilter/FoodFilterItem"
 import styles from './AvailableFood.module.css'
 import { useState, useEffect } from 'react'
 
