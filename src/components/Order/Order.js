@@ -1,5 +1,6 @@
 import {  useCart  } from 'react-use-cart'
 import styles from './Order.module.css'
+import { Typography, Button } from '@mui/material';
 const Order = () => {
 
   const {
@@ -8,19 +9,19 @@ const Order = () => {
     updateItemQuantity,
   } = useCart()
 
-  if (isEmpty) return <p>View menu to add order!</p>;
+  if (isEmpty) return <Typography>View menu to add order!</Typography>;
 
   return (
     <>
       {items.map((item) => (
-        <div key={item.id} className={styles.orderItem}>
+        <Typography key={item.id} align='centre' >
           <div>{item.name} (${item.price})</div>
           <div>
-            <button onClick={() => updateItemQuantity(item.id, item.quantity + 1)}>+</button>
-            <p>{item.quantity}</p>
-            <button onClick={() => updateItemQuantity(item.id, item.quantity - 1)}>-</button>
+            <Button onClick={() => updateItemQuantity(item.id, item.quantity + 1)}>+</Button>
+            <Typography variant='p'>{item.quantity}</Typography>
+            <Button onClick={() => updateItemQuantity(item.id, item.quantity - 1)}>-</Button>
           </div>
-        </div>
+        </Typography>
       ))}
     </>
   );

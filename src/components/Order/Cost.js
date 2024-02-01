@@ -1,5 +1,6 @@
 import {  useCart  } from 'react-use-cart'
-
+import { Button, Typography, Box } from '@mui/material'
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const Cost = () => {
 
@@ -26,14 +27,14 @@ const Cost = () => {
   }
 
   return ( 
-    <div>
-      <p>Total items: {totalItems}</p>
-      <h3>Sub Total: ${subTotal.toFixed(2)}</h3>
-      <h4>Gst 9%: ${gst(subTotal).toFixed(2)}</h4>
-      <h4>Service Charge 10%: ${serviceCharge(subTotal).toFixed(2)}</h4>
-      <h2>Grand Total: ${grandTotal(subTotal).toFixed(2)}</h2>
-      <button onClick={emptyCart}>clear cart</button>
-    </div>
+    <Box>
+      <Typography variant='h5' sx={{ fontWeight: 'bold' }}>Total items: {totalItems}</Typography>
+      <Typography variant='h6'>Sub Total: ${subTotal.toFixed(2)}</Typography>
+      <Typography variant='small'>Gst 9%: ${gst(subTotal).toFixed(2)}</Typography><br></br>
+      <Typography variant='small'>Service Charge 10%: ${serviceCharge(subTotal).toFixed(2)}</Typography>
+      <Typography variant='h5' sx={{ fontWeight: 'bold' }}>Grand Total: ${grandTotal(subTotal).toFixed(2)}</Typography>
+      <Button variant="outlined" startIcon={<DeleteIcon />} sx={{ backgroundColor: 'white', color: 'black' }} onClick={emptyCart}>clear cart</Button>
+    </Box>
   )
 }
 
