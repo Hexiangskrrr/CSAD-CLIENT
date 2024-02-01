@@ -1,6 +1,6 @@
 import React from 'react'
 import './Menu.css'
-import AvailableFood from '../../components/Food/AvailableFood'
+import AvailableFood from '../../components/Food/AvailableFood/AvailableFood'
 import Header from '../../components/Layout/Header/Header'
 import {  useEffect  } from 'react'
 
