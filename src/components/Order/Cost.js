@@ -4,7 +4,6 @@ import { Button, Typography, Box } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import React, { useState } from 'react';
-import { useCart } from 'react-use-cart';
 import CheckoutFormWrapper from '../Checkout/checkoutform';
 import { loadStripe } from '@stripe/stripe-js';
 
