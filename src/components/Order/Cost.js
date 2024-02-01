@@ -1,9 +1,15 @@
+
+import {  useCart  } from 'react-use-cart'
+import { Button, Typography, Box } from '@mui/material'
+import DeleteIcon from '@mui/icons-material/Delete';
+
 import React, { useState } from 'react';
 import { useCart } from 'react-use-cart';
 import CheckoutFormWrapper from '../Checkout/checkoutform';
 import { loadStripe } from '@stripe/stripe-js';
 
 const stripePromise = loadStripe('pk_test_51Odk98BHlJk2DzC2ciIHM1zO9MOPROrbYaGg4dYDnEBd5NEqYCLZ58fgoLWGZcwanhSZ3499YqYohBRbtJhdpXx1006e7K0TsU');
+
 
 const Cost = () => {
   const { items, totalItems, emptyCart } = useCart();
@@ -64,17 +70,19 @@ const Cost = () => {
 };
 
   return ( 
-    <div>
-      <p>Total items: {totalItems}</p>
-      <h3>Sub Total: ${subTotal.toFixed(2)}</h3>
-      <h4>Gst 9%: ${gst(subTotal).toFixed(2)}</h4>
-      <h4>Service Charge 10%: ${serviceCharge(subTotal).toFixed(2)}</h4>
-      <h2>Grand Total: ${grandTotal(subTotal).toFixed(2)}</h2>
-      <button onClick={emptyCart}>clear cart</button>
+
+    <Box>
+      <Typography variant='h5' sx={{ fontWeight: 'bold' }}>Total items: {totalItems}</Typography>
+      <Typography variant='h6'>Sub Total: ${subTotal.toFixed(2)}</Typography>
+      <Typography variant='small'>Gst 9%: ${gst(subTotal).toFixed(2)}</Typography><br></br>
+      <Typography variant='small'>Service Charge 10%: ${serviceCharge(subTotal).toFixed(2)}</Typography>
+      <Typography variant='h5' sx={{ fontWeight: 'bold' }}>Grand Total: ${grandTotal(subTotal).toFixed(2)}</Typography>
+      <Button variant="outlined" startIcon={<DeleteIcon />} sx={{ backgroundColor: 'white', color: 'black' }} onClick={emptyCart}>clear cart</Button>
       <button onClick={handleCheckout}>Checkout</button>
       {isCheckingOut && <CheckoutFormWrapper />}
-    </div>
-  );
-};
+    </Box>
+  )
+}
+
 
 export default Cost;
