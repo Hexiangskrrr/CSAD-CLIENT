@@ -15,10 +15,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-
-
 const Login = () => {
-  
   const navigate = useNavigate();
 
   const [userType, setUserType] = useState();
@@ -79,8 +76,6 @@ const Login = () => {
       });
   };
 
-
-  
   return (
     <div>
       <div>
@@ -94,7 +89,7 @@ const Login = () => {
           <Typography variant="h5" align="center">
             Sign In
           </Typography>
-          <Box component="form" onSubmit={handleSignUp}>
+          <Box component="form" onSubmit={handleSignIn}>
             <TextField
               margin="normal"
               fullWidth
@@ -113,15 +108,15 @@ const Login = () => {
               label="Password"
               type="password"
               id="password"
-              
               onChange={(e) =>
                 setSignInData({ ...signInData, password: e.target.value })
               }
             />
-          </Box>
           <Button type="submit" fullWidth variant="contained" sx={{ mt: 3 }}>
             Sign In
           </Button>
+          </Box>
+
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2" onClick={continueAsGuest}>
