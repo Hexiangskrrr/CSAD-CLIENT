@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { loadStripe } from '@stripe/stripe-js';
 import {
   EmbeddedCheckoutProvider,
   EmbeddedCheckout
 } from '@stripe/react-stripe-js';
 
-const stripePromise = loadStripe('pk_test_51Odk98BHlJk2DzC2ciIHM1zO9MOPROrbYaGg4dYDnEBd5NEqYCLZ58fgoLWGZcwanhSZ3499YqYohBRbtJhdpXx1006e7K0TsU');
+import stripePromise from '../StripeConfig';
 
 const App = () => {
   const [clientSecret, setClientSecret] = useState('');

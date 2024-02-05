@@ -5,9 +5,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 import React, { useState } from 'react';
 import CheckoutFormWrapper from '../Checkout/checkoutform';
-import { loadStripe } from '@stripe/stripe-js';
-
-const stripePromise = loadStripe('pk_test_51Odk98BHlJk2DzC2ciIHM1zO9MOPROrbYaGg4dYDnEBd5NEqYCLZ58fgoLWGZcwanhSZ3499YqYohBRbtJhdpXx1006e7K0TsU');
+import stripePromise from '../StripeConfig';
 
 
 const Cost = () => {
