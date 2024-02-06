@@ -1,33 +1,29 @@
-import React from 'react'
-import './Menu.css'
-import AvailableFood from '../../components/Food/AvailableFood/AvailableFood'
-import Header from '../../components/Layout/Header/Header'
-import {  useEffect  } from 'react'
+import React from "react";
+import AvailableFood from "../../components/Food/AvailableFood/AvailableFood";
+import Header from "../../components/Layout/Header/Header";
+import { useEffect } from "react";
 
-
-import { CartProvider } from 'react-use-cart'
-
-
-
-
+import { CartProvider } from "react-use-cart";
+import { Container, Box } from "@mui/material";
 
 function Menu() {
-
-
   useEffect(() => {
-    sessionStorage.clear()
-    localStorage.clear()
+    sessionStorage.clear();
+    localStorage.clear();
   }, []);
 
-  return(
+  return (
     <CartProvider>
-    <div>
-      <div id='header'><Header/></div>
-      <div id='availablefood'><AvailableFood/></div>
-    </div>
+      <Box align="center">
+        <Header id="header">
+          <Header />
+        </Header>
+        <Container id="availablefood">
+          <AvailableFood />
+        </Container>
+      </Box>
     </CartProvider>
-  )
+  );
 }
 
-
-export default Menu
+export default Menu;
