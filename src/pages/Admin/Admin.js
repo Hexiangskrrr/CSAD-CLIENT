@@ -1,29 +1,25 @@
-import { useState, useEffect } from 'react'
-import FoodTable from '../../components/Food/FoodTable/FoodTable'
-import AddFoodForm from '../../components/Food/FoodForm/AddFoodForm'
-import EditFoodForm from '../../components/Food/FoodForm/EditFoodForm'
+import { useState, useEffect } from "react";
+import FoodTable from "../../components/Food/FoodTable/FoodTable";
+import AddFoodForm from "../../components/Food/FoodForm/AddFoodForm";
+import EditFoodForm from "../../components/Food/FoodForm/EditFoodForm";
+import { Container } from "@mui/material";
 
 const Admin = () => {
-
-  const [selectedFood, setSelectedFood] = useState(null)
+  const [selectedFood, setSelectedFood] = useState(null);
 
   const pull_data = (data) => {
-    setSelectedFood(data)
-  }
+    setSelectedFood(data);
+  };
 
   return (
-    <div>
-      <FoodTable 
-        func={pull_data}
-      />
+    <Container component="main">
+      <FoodTable func={pull_data} />
 
-      <EditFoodForm 
-        foodData={selectedFood}
-      />
+      <EditFoodForm foodData={selectedFood} />
 
       <AddFoodForm />
-    </div>
-  )
-}
+    </Container>
+  );
+};
 
-export default Admin
+export default Admin;

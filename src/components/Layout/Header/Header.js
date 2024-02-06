@@ -6,6 +6,8 @@ import PureModal from 'react-pure-modal'
 import 'react-pure-modal/dist/react-pure-modal.min.css'
 import Order from '../../Order/Order'
 import Cost from '../../Order/Cost'
+import { Button, Typography } from '@mui/material'
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const Header = () => {
 
@@ -15,12 +17,12 @@ const Header = () => {
   return (
     <div className={styles.container}>
       <h1>Delicious Food</h1>
-      <button onClick={() => setModal(true)}>cart {totalItems}</button>
+      <Button startIcon={<ShoppingCartIcon />} sx={{color:'black'}} onClick={() => setModal(true)}>{totalItems}</Button>
         <PureModal
           header="Order"
           footer={
             <div>
-              <h2>Order Summary</h2>
+              <Typography variant='h5'>Order Summary</Typography>
               <Cost/>
             </div>
           }
