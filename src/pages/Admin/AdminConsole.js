@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import FoodTable from "../../components/Food/FoodTable/FoodTable";
 import AddFoodForm from "../../components/Food/FoodForm/AddFoodForm";
 import EditFoodForm from "../../components/Food/FoodForm/EditFoodForm";
 import { Container } from "@mui/material";
 
-const Admin = () => {
+const AdminConsole = () => {
   const [selectedFood, setSelectedFood] = useState(null);
 
   const pull_data = (data) => {
@@ -22,4 +22,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default AdminConsole;
