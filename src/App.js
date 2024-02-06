@@ -4,6 +4,7 @@ import {  BrowserRouter, Routes, Route  } from 'react-router-dom'
 import Login from './pages/Login/Login'
 import Menu from './pages/Menu/Menu'
 import Admin from './pages/Admin/Admin'
+import Kitchen from './pages/Kitchen/OrderList'
 
 
 
@@ -15,6 +16,7 @@ function App() {
         <Route index element={<Login/>} />
         <Route path="menu" element={<Menu />} />
         <Route path="admin" element={<Admin />} />
+        <Route path="kitchen" element={<Kitchen />} />
       </Routes>
     </BrowserRouter>
   )
