@@ -34,9 +34,9 @@ const FoodTable = (props) => {
   };
 
   const onDelete = (food) => {
-    const foodName = food.name;
+    const foodId = food.id;
     axios
-      .delete(`${SERVER_URL}/delete`, { data: { foodName } })
+      .delete(`${SERVER_URL}/delete`, { data: { foodId } })
       .then((response) => {
         if (response.status === 200) {
           alert("Item deleted");

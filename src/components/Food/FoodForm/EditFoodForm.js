@@ -11,12 +11,11 @@ import {
   Button,
   Grid,
   Box,
-  Card,
-  Paper,
 } from "@mui/material";
 
 const EditFoodForm = (props) => {
   const [foodDetails, setFoodDetails] = useState({
+    id: "",
     name: "",
     price: "",
     category: "",
@@ -27,6 +26,7 @@ const EditFoodForm = (props) => {
     // Set state based on selected edit
     if (props.foodData) {
       setFoodDetails({
+        id: props.foodData.id || "",
         name: props.foodData.name || "",
         price: props.foodData.price || "",
         category: props.foodData.category || "",
@@ -39,26 +39,26 @@ const EditFoodForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    //parse price as a float
-    const parsedPrice = parseFloat(foodDetails.price);
-
-    if (!isNaN(parsedPrice)) {
-      axios
-        .put(`${SERVER_URL}/edit`, { ...foodDetails, price: parsedPrice })
-        .then((response) => {
-          if (response.status === 200) {
-            alert("Edited Successfully");
-          } else {
-            alert("Something went wrong");
-          }
-        })
-        .catch((error) => {
-          console.error("Error while editing", error);
-        });
-    } else {
-      alert("Please enter a valid price.");
-    }
+    axios
+      .post(`${SERVER_URL}/editfood`, foodDetails)
+      .then((response) => {
+        if (response.status === 200) {
+          alert("Edited Successfully");
+          setFoodDetails({
+            //clear form
+            id: "",
+            name: "",
+            price: "",
+            category: "",
+            description: "",
+          });
+        } else {
+          alert("Something went wrong");
+        }
+      })
+      .catch((error) => {
+        console.error("Error while editing", error);
+      });
   };
 
   return (
@@ -66,8 +66,20 @@ const EditFoodForm = (props) => {
       <Typography variant="h4" align="center" sx={{ mt: "4px" }}>
         Edit
       </Typography>
-      <Box onSubmit={handleSubmit}>
+      <Box onSubmit={handleSubmit} component="form">
         <Grid container spacing={2} alignItems="left">
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              id="Id"
+              label="Id"
+              size="small"
+              value={foodDetails.id}
+              onChange={(e) =>
+                setFoodDetails({ ...foodDetails, id: e.target.value })
+              }
+            />
+          </Grid>
           <Grid item xs={12}>
             <TextField
               fullWidth

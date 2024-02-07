@@ -25,26 +25,18 @@ const AddFoodForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    //parse price as a float
-    const parsedPrice = parseFloat(foodDetails.price);
-
-    if (!isNaN(parsedPrice)) {
-      axios
-        .post(`${SERVER_URL}/add`, { ...foodDetails, price: parsedPrice })
-        .then((response) => {
-          if (response.status === 200) {
-            alert("Added Successfully");
-          } else {
-            alert("Something went wrong");
-          }
-        })
-        .catch((error) => {
-          console.error("Error while adding", error);
-        });
-    } else {
-      alert("Please enter a valid price.");
-    }
+    axios
+      .post(`${SERVER_URL}/addfood`, foodDetails)
+      .then((response) => {
+        if (response.status === 200) {
+          alert("Added Successfully");
+        } else {
+          alert("Something went wrong");
+        }
+      })
+      .catch((error) => {
+        console.error("Error while adding", error);
+      });
   };
 
   return (
@@ -52,7 +44,7 @@ const AddFoodForm = () => {
       <Typography variant="h4" align="center" sx={{ mt: "4px" }}>
         Add
       </Typography>
-      <Box onSubmit={handleSubmit}>
+      <Box onSubmit={handleSubmit} component="form">
         <Grid container spacing={2} alignItems="left">
           <Grid item xs={12}>
             <TextField
