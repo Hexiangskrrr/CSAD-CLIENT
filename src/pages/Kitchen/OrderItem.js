@@ -1,7 +1,10 @@
 import { Button } from '@mui/material';
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const KitchenItem = (props) => {
+
+  const SERVER_URL = 'http://localhost:5003'
 
   const [checkboxes, setCheckboxes] = useState(() => {
     const initialCheckboxes = {};
@@ -29,14 +32,14 @@ const KitchenItem = (props) => {
   };
 
   const handleRemoveItem = () => {
+    axios.post(`${SERVER_URL}/orders/${props.id}/move`)
     props.onRemoveItem(props.id);
-  }
-
+  };
 
   return (
     <div>
       <div key={props.id}>
-      <div>Order No. {props.id}</div>
+      <div>Order ID: {props.id}</div>
         <label key={props.id}>
           Order Time: {props.timestamp}  
           {props.checkboxData.map((item, index) => (
@@ -46,7 +49,7 @@ const KitchenItem = (props) => {
                 checked={checkboxes[`checkbox${index + 1}`]}
                 onChange={() => handleCheckboxChange(index)}
               />
-              {item.label}
+              {item.label} , Quantity: {item.quantity}
             </div>
           ))}
         </label>

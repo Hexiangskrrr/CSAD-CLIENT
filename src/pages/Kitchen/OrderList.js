@@ -1,35 +1,52 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import KitchenItem from './OrderItem';
+import axios from "axios"
 
 function Kitchen() {
+    const [orderList, setOrderList] = useState([])
 
-    const [kitchenData, setKitchenData] = useState([
-        { id: 1, timestamp: "2:00", checkboxes: [{ label: "Food 1" }, { label: "Food 2" }] },
-        { id: 2, timestamp: "3:00", checkboxes: [{ label: "Food 3" }, { label: "Food 4" }, { label: "Food 5" }] },
-        // Get from firebase - orders
-        // Rn the orders table only got timestamp and items, need make
-    ]);
+    const SERVER_URL = 'http://localhost:5003'
+
+    useEffect(() => {
+        axios.get(`${SERVER_URL}/orders`)
+        .then(response => {
+            setOrderList(response.data);
+            console.log(orderList)
+        })
+        .catch(error => {
+            console.error("Error fetching data:", error)
+        });
+    }, []);
 
     const handleRemoveItem = (orderId) => {
-        console.log("Removing order with id:", orderId);
-        const updatedKitchenData = kitchenData.filter(kitchen => kitchen.id !== orderId);
-        console.log("Updated kitchen data:", updatedKitchenData);
-        setKitchenData(updatedKitchenData);
-      };
+        console.log("Successfully Completed Order: ", orderId);
+        axios.post(`${SERVER_URL}/orders/${orderId}/move`)
+        .then(response => {
+            const updatedOrderList = orderList.filter(order => order.id !== orderId);
+            setOrderList(updatedOrderList);
+        })
+        .catch(error => {
+            console.error("Error moving order:", error);
+    });
+    };
+
+    const kitchenItems = orderList.map((order) => {
+        const { seconds, nanoseconds } = order.timestamp;
+        const milliseconds = seconds * 1000 + nanoseconds / 1000000;
+        const timestampDate = new Date(milliseconds).toLocaleString();
+        return (
+        <KitchenItem 
+        key={order.id} 
+        id={order.id} 
+        timestamp={timestampDate}
+        checkboxData={order.items.map(item => ({ label: item.name, quantity: item.quantity }))}  //Pass ordered items to OrderItem.js
+        onRemoveItem={handleRemoveItem} />
+        );
+    });
 
     return (    
-        <div>
-            {kitchenData.map((kitchen) => (
-                <KitchenItem 
-                key={kitchen.id} 
-                id={kitchen.id} 
-                timestamp={kitchen.timestamp} 
-                checkboxData={kitchen.checkboxes} 
-                //checkboxData={kitchen.items.map(item => ({ label: item.name }))}  //Pass ordered items to OrderItem.js
-                onRemoveItem={handleRemoveItem} />
-            ))}
-        </div>
+        <div>{kitchenItems}</div>
     );
-}
+};
 
 export default Kitchen
