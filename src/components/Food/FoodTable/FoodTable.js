@@ -34,10 +34,11 @@ const FoodTable = (props) => {
   };
 
   const onDelete = (food) => {
+    const foodName = food.name;
     axios
-      .delete(`${SERVER_URL}/delete`, food)
+      .delete(`${SERVER_URL}/delete`, { data: { foodName } })
       .then((response) => {
-        if (response.data.authenticated) {
+        if (response.status === 200) {
           alert("Item deleted");
         } else {
           console.error("Something went wrong");
@@ -49,39 +50,39 @@ const FoodTable = (props) => {
   };
 
   return (
-    <Container margin='5px'>
-    <TableContainer component={Paper}>
-      <Table size="small" aria-label="a dense table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Id</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Price ($)</TableCell>
-            <TableCell>Category</TableCell>
-            <TableCell align="center">Description</TableCell>
-            <TableCell></TableCell>
-            <TableCell></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {foodList.map((food) => (
-            <TableRow key={food.id} >
-              <TableCell align="right">{food.id}</TableCell>
-              <TableCell align="right">{food.name}</TableCell>
-              <TableCell align="right">{food.price}</TableCell>
-              <TableCell align="right">{food.category}</TableCell>
-              <TableCell align="center">{food.description}</TableCell>
-              <TableCell>
-                <Button onClick={() => onEdit(food)}>Edit</Button>
-              </TableCell>
-              <TableCell>
-                <Button onClick={() => onDelete(food)}>Delete</Button>
-              </TableCell>
+    <Container margin="5px">
+      <TableContainer component={Paper}>
+        <Table size="small" aria-label="a dense table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Id</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Price ($)</TableCell>
+              <TableCell>Category</TableCell>
+              <TableCell align="center">Description</TableCell>
+              <TableCell></TableCell>
+              <TableCell></TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {foodList.map((food) => (
+              <TableRow key={food.id}>
+                <TableCell align="right">{food.id}</TableCell>
+                <TableCell align="right">{food.name}</TableCell>
+                <TableCell align="right">{food.price}</TableCell>
+                <TableCell align="right">{food.category}</TableCell>
+                <TableCell align="center">{food.description}</TableCell>
+                <TableCell>
+                  <Button onClick={() => onEdit(food)}>Edit</Button>
+                </TableCell>
+                <TableCell>
+                  <Button onClick={() => onDelete(food)}>Delete</Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </Container>
   );
 };

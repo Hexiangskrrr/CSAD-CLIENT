@@ -2,7 +2,7 @@ import styles from "./FoodItem.module.css";
 import PureModal from "react-pure-modal";
 import "react-pure-modal/dist/react-pure-modal.min.css";
 import { useState } from "react";
-import { Card, Button, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { useCart } from "react-use-cart";
 import AddIcon from "@mui/icons-material/Add";
 

@@ -47,7 +47,7 @@ const EditFoodForm = (props) => {
       axios
         .put(`${SERVER_URL}/edit`, { ...foodDetails, price: parsedPrice })
         .then((response) => {
-          if (response.data.authenticated) {
+          if (response.status === 200) {
             alert("Edited Successfully");
           } else {
             alert("Something went wrong");
@@ -63,7 +63,7 @@ const EditFoodForm = (props) => {
 
   return (
     <Container maxWidth="xs">
-      <Typography variant="h4" align="center" sx={{mt: '4px'}}>
+      <Typography variant="h4" align="center" sx={{ mt: "4px" }}>
         Edit
       </Typography>
       <Box onSubmit={handleSubmit}>

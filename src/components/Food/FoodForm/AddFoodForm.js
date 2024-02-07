@@ -10,7 +10,7 @@ import {
   Container,
   Button,
   Box,
-  Grid
+  Grid,
 } from "@mui/material";
 
 const AddFoodForm = () => {
@@ -33,7 +33,7 @@ const AddFoodForm = () => {
       axios
         .post(`${SERVER_URL}/add`, { ...foodDetails, price: parsedPrice })
         .then((response) => {
-          if (response.data.authenticated) {
+          if (response.status === 200) {
             alert("Added Successfully");
           } else {
             alert("Something went wrong");
@@ -49,7 +49,7 @@ const AddFoodForm = () => {
 
   return (
     <Container maxWidth="xs">
-      <Typography variant="h4" align="center" sx={{mt: '4px'}}>
+      <Typography variant="h4" align="center" sx={{ mt: "4px" }}>
         Add
       </Typography>
       <Box onSubmit={handleSubmit}>
@@ -60,7 +60,6 @@ const AddFoodForm = () => {
               id="Name"
               label="Name"
               size="small"
-    
               onChange={(e) =>
                 setFoodDetails({ ...foodDetails, name: e.target.value })
               }
@@ -72,7 +71,6 @@ const AddFoodForm = () => {
               id="Price"
               label="Price($)"
               size="small"
-         
               onChange={(e) =>
                 setFoodDetails({ ...foodDetails, price: e.target.value })
               }
@@ -84,9 +82,9 @@ const AddFoodForm = () => {
               <Select
                 margin="dense"
                 label="Category:"
-           
-                onChange={(e) => setFoodDetails({ ...foodDetails, category: e.target.value })}
-                
+                onChange={(e) =>
+                  setFoodDetails({ ...foodDetails, category: e.target.value })
+                }
               >
                 <MenuItem value="Drinks">Drinks</MenuItem>
                 <MenuItem value="Dessert">Dessert</MenuItem>
@@ -101,7 +99,6 @@ const AddFoodForm = () => {
               multiline
               label="Description"
               size="small"
-
               onChange={(e) =>
                 setFoodDetails({ ...foodDetails, description: e.target.value })
               }
@@ -115,7 +112,6 @@ const AddFoodForm = () => {
         </Grid>
       </Box>
     </Container>
-    
   );
 };
 
