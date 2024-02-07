@@ -106,7 +106,7 @@ const AddFoodForm = () => {
           </Grid>
           <Grid item xs={12}>
             <Button fullWidth type="submit" variant="contained">
-              Edit
+              Add
             </Button>
           </Grid>
         </Grid>
