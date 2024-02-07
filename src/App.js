@@ -1,26 +1,36 @@
-import React from 'react'
-import './App.css'
-import {  BrowserRouter, Routes, Route  } from 'react-router-dom'
-import Login from './pages/Login/Login'
-import Menu from './pages/Menu/Menu'
-import Admin from './pages/Admin/Admin'
+import React from "react";
+import { useState } from "react";
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./pages/Login/Login";
+import Menu from "./pages/Menu/Menu";
+import AdminAuth from "./pages/Admin/AdminAuth";
+import AdminConsole from "./pages/Admin/AdminConsole";
 import Kitchen from './pages/Kitchen/OrderList'
 
-
-
 function App() {
+  const [isAdminAuthenticated, IsAdminAuthenticated] = useState(false);
 
-  return(
+  const handleAdminAuth = () => {
+    IsAdminAuthenticated(true);
+  };
+
+  return (
     <BrowserRouter>
       <Routes>
-        <Route index element={<Login/>} />
+        <Route index element={<Login />} />
         <Route path="menu" element={<Menu />} />
+        <Route
+          path="/admin"
+          element={<AdminAuth onAdminAuth={handleAdminAuth} />}
+        />
+        {isAdminAuthenticated ? (
+          <Route path="/adminconsole" element={<AdminConsole />} />
+        ) : null}
         <Route path="admin" element={<Admin />} />
-        <Route path="kitchen" element={<Kitchen />} />
       </Routes>
     </BrowserRouter>
-  )
+  );
 }
 
-
-export default App
+export default App;

@@ -1,73 +1,135 @@
-import { useState, useEffect } from 'react'
-import axios from "axios"
+import { useState, useEffect } from "react";
+import axios from "axios";
+import {
+  Typography,
+  TextField,
+  Select,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Container,
+  Button,
+  Grid,
+  Box,
+  Card,
+  Paper,
+} from "@mui/material";
 
 const EditFoodForm = (props) => {
   const [foodDetails, setFoodDetails] = useState({
-    name: '',
-    price: '', 
-    category: '',
-    description: ''
+    name: "",
+    price: "",
+    category: "",
+    description: "",
   });
 
   useEffect(() => {
     // Set state based on selected edit
     if (props.foodData) {
       setFoodDetails({
-        name: props.foodData.name || '',
-        price: props.foodData.price || '',
-        category: props.foodData.category || '',
-        description: props.foodData.description || ''
+        name: props.foodData.name || "",
+        price: props.foodData.price || "",
+        category: props.foodData.category || "",
+        description: props.foodData.description || "",
       });
     }
   }, [props.foodData]);
 
-  const SERVER_URL = 'http://localhost:5003'
+  const SERVER_URL = "http://localhost:5003";
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     //parse price as a float
-    const parsedPrice = parseFloat(foodDetails.price)
+    const parsedPrice = parseFloat(foodDetails.price);
 
     if (!isNaN(parsedPrice)) {
-      axios.put(`${SERVER_URL}/edit`, { ...foodDetails, price: parsedPrice })
-        .then(response => {
+      axios
+        .put(`${SERVER_URL}/edit`, { ...foodDetails, price: parsedPrice })
+        .then((response) => {
           if (response.data.authenticated) {
-            alert("Edited Successfully")
+            alert("Edited Successfully");
           } else {
-            alert("Something went wrong")
+            alert("Something went wrong");
           }
         })
-        .catch(error => {
-          console.error("Error while editing", error)
+        .catch((error) => {
+          console.error("Error while editing", error);
         });
     } else {
-      alert("Please enter a valid price.")
+      alert("Please enter a valid price.");
     }
   };
 
   return (
-    <div>
-      <h1>Edit</h1>
-      <form onSubmit={handleSubmit}>
-        <br/> 
-        Name: <input type="text" value={foodDetails.name} onChange={(e) => setFoodDetails({ ...foodDetails, name: e.target.value })}></input>
-        <br/>
-        Price($): <input type="text" value={foodDetails.price} onChange={(e) => setFoodDetails({ ...foodDetails, price: e.target.value })}></input> 
-        <br/>
-        Category: 
-        <select name="category" value={foodDetails.category} onChange={(e) => setFoodDetails({ ...foodDetails, category: e.target.value })}>
-          <option value="Drinks">Drinks</option>
-          <option value="Dessert">Dessert</option>
-          <option value="Seasonal">Seasonal</option>
-          <option value="Set Meal">Set Meal</option>
-        </select>
-        <br/>
-        Description: <textarea value={foodDetails.description} onChange={(e) => setFoodDetails({ ...foodDetails, description: e.target.value })}></textarea>
-        <br/>
-        <input type="submit" value={'Edit'}></input>
-      </form>
-    </div>
+    <Container maxWidth="xs">
+      <Typography variant="h4" align="center" sx={{mt: '4px'}}>
+        Edit
+      </Typography>
+      <Box onSubmit={handleSubmit}>
+        <Grid container spacing={2} alignItems="left">
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              id="Name"
+              label="Name"
+              size="small"
+              value={foodDetails.name}
+              onChange={(e) =>
+                setFoodDetails({ ...foodDetails, name: e.target.value })
+              }
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              id="Price"
+              label="Price($)"
+              size="small"
+              value={foodDetails.price}
+              onChange={(e) =>
+                setFoodDetails({ ...foodDetails, price: e.target.value })
+              }
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <FormControl fullWidth size="small">
+              <InputLabel id="Category">Category:</InputLabel>
+              <Select
+                margin="dense"
+                label="Category:"
+                value={foodDetails.category}
+                onChange={(e) =>
+                  setFoodDetails({ ...foodDetails, category: e.target.value })
+                }
+              >
+                <MenuItem value="Drinks">Drinks</MenuItem>
+                <MenuItem value="Dessert">Dessert</MenuItem>
+                <MenuItem value="Seasonal">Seasonal</MenuItem>
+                <MenuItem value="Set Meal">Set Meal</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              multiline
+              label="Description"
+              size="small"
+              value={foodDetails.description}
+              onChange={(e) =>
+                setFoodDetails({ ...foodDetails, description: e.target.value })
+              }
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Button fullWidth type="submit" variant="contained">
+              Edit
+            </Button>
+          </Grid>
+        </Grid>
+      </Box>
+    </Container>
   );
 };
 
