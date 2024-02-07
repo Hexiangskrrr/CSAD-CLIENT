@@ -10,7 +10,7 @@ import {
   Container,
   Button,
   Box,
-  Grid
+  Grid,
 } from "@mui/material";
 
 const AddFoodForm = () => {
@@ -25,34 +25,26 @@ const AddFoodForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    //parse price as a float
-    const parsedPrice = parseFloat(foodDetails.price);
-
-    if (!isNaN(parsedPrice)) {
-      axios
-        .post(`${SERVER_URL}/add`, { ...foodDetails, price: parsedPrice })
-        .then((response) => {
-          if (response.data.authenticated) {
-            alert("Added Successfully");
-          } else {
-            alert("Something went wrong");
-          }
-        })
-        .catch((error) => {
-          console.error("Error while adding", error);
-        });
-    } else {
-      alert("Please enter a valid price.");
-    }
+    axios
+      .post(`${SERVER_URL}/addfood`, foodDetails)
+      .then((response) => {
+        if (response.status === 200) {
+          alert("Added Successfully");
+        } else {
+          alert("Something went wrong");
+        }
+      })
+      .catch((error) => {
+        console.error("Error while adding", error);
+      });
   };
 
   return (
     <Container maxWidth="xs">
-      <Typography variant="h4" align="center" sx={{mt: '4px'}}>
+      <Typography variant="h4" align="center" sx={{ mt: "4px" }}>
         Add
       </Typography>
-      <Box onSubmit={handleSubmit}>
+      <Box onSubmit={handleSubmit} component="form">
         <Grid container spacing={2} alignItems="left">
           <Grid item xs={12}>
             <TextField
@@ -60,7 +52,6 @@ const AddFoodForm = () => {
               id="Name"
               label="Name"
               size="small"
-    
               onChange={(e) =>
                 setFoodDetails({ ...foodDetails, name: e.target.value })
               }
@@ -72,7 +63,6 @@ const AddFoodForm = () => {
               id="Price"
               label="Price($)"
               size="small"
-         
               onChange={(e) =>
                 setFoodDetails({ ...foodDetails, price: e.target.value })
               }
@@ -84,9 +74,9 @@ const AddFoodForm = () => {
               <Select
                 margin="dense"
                 label="Category:"
-           
-                onChange={(e) => setFoodDetails({ ...foodDetails, category: e.target.value })}
-                
+                onChange={(e) =>
+                  setFoodDetails({ ...foodDetails, category: e.target.value })
+                }
               >
                 <MenuItem value="Drinks">Drinks</MenuItem>
                 <MenuItem value="Dessert">Dessert</MenuItem>
@@ -101,7 +91,6 @@ const AddFoodForm = () => {
               multiline
               label="Description"
               size="small"
-
               onChange={(e) =>
                 setFoodDetails({ ...foodDetails, description: e.target.value })
               }
@@ -109,13 +98,12 @@ const AddFoodForm = () => {
           </Grid>
           <Grid item xs={12}>
             <Button fullWidth type="submit" variant="contained">
-              Edit
+              Add
             </Button>
           </Grid>
         </Grid>
       </Box>
     </Container>
-    
   );
 };
 
