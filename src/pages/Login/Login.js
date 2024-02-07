@@ -38,6 +38,10 @@ const Login = () => {
     navigate("/menu");
   };
 
+  const Kitchen = () => {
+    navigate("/kitchen");
+  };
+
   const SERVER_URL = "http://localhost:5003";
 
   const handleSignIn = (e) => {
@@ -82,6 +86,7 @@ const Login = () => {
         <Button onClick={() => setUserType("existing")}>Sign In</Button>
         <Button onClick={() => setUserType("new")}>Sign Up</Button>
         <Button onClick={continueAsGuest}>Continue As Guest</Button>
+        <Button onClick={Kitchen}>Kitchen</Button>
       </div>
 
       {userType === "existing" && (
