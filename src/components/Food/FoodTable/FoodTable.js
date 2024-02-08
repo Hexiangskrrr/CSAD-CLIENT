@@ -27,7 +27,7 @@ const FoodTable = (props) => {
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, []);
+  }, [props.refreshFoodTable]);
 
   const onEdit = (food) => {
     props.func(food);

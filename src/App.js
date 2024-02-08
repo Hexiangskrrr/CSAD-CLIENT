@@ -8,6 +8,7 @@ import AdminAuth from "./pages/Admin/AdminAuth";
 import AdminConsole from "./pages/Admin/AdminConsole";
 import KitchenAuth from "./pages/Kitchen/KitchenAuth";
 import KitchenConsole from "./pages/Kitchen/KitchenConsole";
+import About from "./pages/About/About";
 
 function App() {
   const [isAdminAuthenticated, IsAdminAuthenticated] = useState(false);
@@ -26,6 +27,7 @@ function App() {
       <Routes>
         <Route index element={<Login />} />
         <Route path="menu" element={<Menu />} />
+        <Route path="about" element={<About />} />
         <Route
           path="/admin"
           element={<AdminAuth onAdminAuth={handleAdminAuth} />}
