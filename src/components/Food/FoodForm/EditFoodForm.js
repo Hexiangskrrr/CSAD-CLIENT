@@ -115,10 +115,10 @@ const EditFoodForm = (props) => {
                   setFoodDetails({ ...foodDetails, category: e.target.value })
                 }
               >
+                <MenuItem value="Seasonal">Seasonal</MenuItem>
+                <MenuItem value="Sushi">Sushi</MenuItem>
                 <MenuItem value="Drinks">Drinks</MenuItem>
                 <MenuItem value="Dessert">Dessert</MenuItem>
-                <MenuItem value="Seasonal">Seasonal</MenuItem>
-                <MenuItem value="Set Meal">Set Meal</MenuItem>
               </Select>
             </FormControl>
           </Grid>

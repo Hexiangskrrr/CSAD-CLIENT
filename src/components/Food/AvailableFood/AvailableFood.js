@@ -1,25 +1,26 @@
-import FoodItem from "../FoodItem/FoodItem"
-import axios from "axios"
-import FoodFilterItem from "../FoodFilter/FoodFilterItem"
-import styles from './AvailableFood.module.css'
-import { useState, useEffect } from 'react'
+import FoodItem from "../FoodItem/FoodItem";
+import axios from "axios";
+import FoodFilterItem from "../FoodFilter/FoodFilterItem";
+import styles from "./AvailableFood.module.css";
+import { useState, useEffect } from "react";
 
 const AvailableFood = () => {
-  const [selectedItem, setSelectedItem] = useState()
-  const [foodList, setFoodList] = useState([])
+  const [selectedItem, setSelectedItem] = useState("Seasonal");
+  const [foodList, setFoodList] = useState([]);
 
-  const selections = ["Drinks", "Dessert", "Seasonal", "Set Meal"]
+  const selections = ["Seasonal", "Sushi", "Drinks", "Dessert"];
 
-  const SERVER_URL = 'http://localhost:5003'
+  const SERVER_URL = "http://localhost:5003";
 
   useEffect(() => {
-    axios.get(`${SERVER_URL}/menu`)
-      .then(response => {
+    axios
+      .get(`${SERVER_URL}/menu`)
+      .then((response) => {
         setFoodList(response.data);
-        console.log(foodList)
+        console.log(foodList);
       })
-      .catch(error => {
-        console.error("Error fetching data:", error)
+      .catch((error) => {
+        console.error("Error fetching menu:", error);
       });
   }, []);
 
@@ -36,7 +37,9 @@ const AvailableFood = () => {
     />
   ));
 
-  const filteredFood = foodList.filter((food) => food.category === selectedItem);
+  const filteredFood = foodList.filter(
+    (food) => food.category === selectedItem
+  );
 
   const foodItems = filteredFood.map((food) => (
     <FoodItem
