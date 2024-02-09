@@ -19,24 +19,61 @@ const AddFoodForm = () => {
     price: "",
     category: "Drinks",
     description: "",
+    image: null,
   });
+
+  const handleFileChange = (e) => {
+    const img = e.target.files[0];
+    setFoodDetails({
+      ...foodDetails,
+      image: {
+        preview: URL.createObjectURL(img),
+        data: img,
+      },
+    });
+  };
 
   const SERVER_URL = "http://localhost:5003";
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios
-      .post(`${SERVER_URL}/addfood`, foodDetails)
-      .then((response) => {
-        if (response.status === 200) {
-          alert("Added Successfully");
-        } else {
-          alert("Something went wrong");
-        }
-      })
-      .catch((error) => {
-        console.error("Error while adding", error);
-      });
+
+    try {
+      const formData = new FormData();
+      formData.append("name", foodDetails.name);
+      formData.append("price", foodDetails.price);
+      formData.append("category", foodDetails.category);
+      formData.append("description", foodDetails.description);
+      formData.append("image", foodDetails.image.data);
+
+      console.log(foodDetails.image);
+
+      axios
+        .post(`${SERVER_URL}/addfood`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((response) => {
+          if (response.status === 200) {
+            alert("Added Successfully");
+            setFoodDetails({
+              name: "",
+              price: "",
+              category: "Drinks",
+              description: "",
+              image: null,
+            });
+          } else {
+            alert("Something went wrong");
+          }
+        })
+        .catch((error) => {
+          console.error("Error while adding", error);
+        });
+    } catch (error) {
+      console.error("Error while adding", error);
+    }
   };
 
   return (
@@ -52,6 +89,7 @@ const AddFoodForm = () => {
               id="Name"
               label="Name"
               size="small"
+              value={foodDetails.name}
               onChange={(e) =>
                 setFoodDetails({ ...foodDetails, name: e.target.value })
               }
@@ -63,6 +101,7 @@ const AddFoodForm = () => {
               id="Price"
               label="Price($)"
               size="small"
+              value={foodDetails.price}
               onChange={(e) =>
                 setFoodDetails({ ...foodDetails, price: e.target.value })
               }
@@ -74,14 +113,15 @@ const AddFoodForm = () => {
               <Select
                 margin="dense"
                 label="Category:"
+                value={foodDetails.category}
                 onChange={(e) =>
                   setFoodDetails({ ...foodDetails, category: e.target.value })
                 }
               >
+                <MenuItem value="Seasonal">Seasonal</MenuItem>
+                <MenuItem value="Sushi">Sushi</MenuItem>
                 <MenuItem value="Drinks">Drinks</MenuItem>
                 <MenuItem value="Dessert">Dessert</MenuItem>
-                <MenuItem value="Seasonal">Seasonal</MenuItem>
-                <MenuItem value="Set Meal">Set Meal</MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -91,11 +131,13 @@ const AddFoodForm = () => {
               multiline
               label="Description"
               size="small"
+              value={foodDetails.description}
               onChange={(e) =>
                 setFoodDetails({ ...foodDetails, description: e.target.value })
               }
             />
           </Grid>
+          <input type="file" id="img" name="img" onChange={handleFileChange} />
           <Grid item xs={12}>
             <Button fullWidth type="submit" variant="contained">
               Add

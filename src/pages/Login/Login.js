@@ -32,10 +32,6 @@ const Login = () => {
     navigate("/menu");
   };
 
-  const Kitchen = () => {
-    navigate("/kitchen");
-  };
-
   const SERVER_URL = "http://localhost:5003";
 
   const handleSignIn = (e) => {
@@ -83,9 +79,16 @@ const Login = () => {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            minHeight: "100vh",
+            minHeight: "90vh",
           }}
         >
+          <div
+            style={{ display: "flex", alignItems: "center", padding: "20px" }}
+          >
+            <img src="/favicon-32x32.png" style={{ marginRight: "8px" }} />
+            <p>Delicious Food</p>
+          </div>
+
           <Button onClick={() => setUserType("existing")}>Sign In</Button>
           <Button onClick={() => setUserType("new")}>Sign Up</Button>
           <Button onClick={continueAsGuest}>Continue As Guest</Button>
@@ -201,6 +204,12 @@ const Login = () => {
           {signUpError && <p>Incorrect or password</p>}
         </Container>
       )}
+      <footer>
+        <p>Delicious Food Pte Ltd</p>
+        <a href="http://localhost:3000/about">about</a>
+        <a href="http://localhost:3000/admin">admin</a>
+        <a href="http://localhost:3000/kitchen">kitcheb</a>
+      </footer>
     </div>
   );
 };
