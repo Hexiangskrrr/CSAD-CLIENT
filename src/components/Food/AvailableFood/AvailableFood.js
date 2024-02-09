@@ -49,6 +49,7 @@ const AvailableFood = () => {
       price={food.price}
       description={food.description}
       category={food.category}
+      imageUrl={food.imageUrl}
     />
   ));
 

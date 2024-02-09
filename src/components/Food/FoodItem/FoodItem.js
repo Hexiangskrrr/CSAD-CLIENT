@@ -19,6 +19,7 @@ const FoodItem = (props) => {
       <h3>{props.name}</h3>
       <p>{props.category}</p>
       <p className={styles.price}>${props.price}</p>
+      <img src={props.imageUrl} alt={props.name} />
       <PureModal
         header={
           <Typography variant="h5" sx={{ fontWeight: "bold" }}>
@@ -47,6 +48,11 @@ const FoodItem = (props) => {
       >
         <div>{props.description}</div>
         <div>${props.price}</div>
+        <img
+          src={props.imageUrl}
+          alt={props.name}
+          className={styles.modalImg}
+        />
       </PureModal>
     </div>
   );
