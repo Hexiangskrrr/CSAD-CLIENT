@@ -20,6 +20,7 @@ const EditFoodForm = (props) => {
     price: "",
     category: "",
     description: "",
+    imageUrl: "",
   });
 
   useEffect(() => {
@@ -31,6 +32,7 @@ const EditFoodForm = (props) => {
         price: props.foodData.price || "",
         category: props.foodData.category || "",
         description: props.foodData.description || "",
+        imageUrl: props.foodData.imageUrl || "",
       });
     }
   }, [props.foodData]);
@@ -51,6 +53,7 @@ const EditFoodForm = (props) => {
             price: "",
             category: "",
             description: "",
+            imageUrl: "",
           });
         } else {
           alert("Something went wrong");
