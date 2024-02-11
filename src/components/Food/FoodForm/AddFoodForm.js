@@ -12,6 +12,8 @@ import {
   Box,
   Grid,
 } from "@mui/material";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { styled } from "@mui/material/styles";
 
 const AddFoodForm = () => {
   const [foodDetails, setFoodDetails] = useState({
@@ -22,15 +24,36 @@ const AddFoodForm = () => {
     image: null,
   });
 
+  const VisuallyHiddenInput = styled("input")({
+    clip: "rect(0 0 0 0)",
+    clipPath: "inset(50%)",
+    height: 1,
+    overflow: "hidden",
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    whiteSpace: "nowrap",
+    width: 1,
+  });
+
+  const [previewImage, setPreviewImage] = useState(null);
+
   const handleFileChange = (e) => {
     const img = e.target.files[0];
-    setFoodDetails({
-      ...foodDetails,
-      image: {
-        preview: URL.createObjectURL(img),
-        data: img,
-      },
-    });
+    if (img) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setPreviewImage(e.target.result);
+      };
+      reader.readAsDataURL(img);
+      setFoodDetails({
+        ...foodDetails,
+        image: {
+          preview: URL.createObjectURL(img),
+          data: img,
+        },
+      });
+    }
   };
 
   const SERVER_URL = "http://localhost:5003";
@@ -79,7 +102,7 @@ const AddFoodForm = () => {
   return (
     <Container maxWidth="xs">
       <Typography variant="h4" align="center" sx={{ mt: "4px" }}>
-        Add
+        Add Item
       </Typography>
       <Box onSubmit={handleSubmit} component="form">
         <Grid container spacing={2} alignItems="left">
@@ -137,12 +160,35 @@ const AddFoodForm = () => {
               }
             />
           </Grid>
-          <input type="file" id="img" name="img" onChange={handleFileChange} />
           <Grid item xs={12}>
-            <Button fullWidth type="submit" variant="contained">
-              Add
+            <Button
+              variant="contained"
+              fullWidth
+              component="label"
+              type="file"
+              id="img"
+              name="img"
+              onChange={handleFileChange}
+            >
+              Select Image
+              <VisuallyHiddenInput type="file" />
             </Button>
           </Grid>
+          <Grid item xs={12}>
+            <Button fullWidth type="submit" variant="contained">
+              Add Item
+            </Button>
+          </Grid>
+          {previewImage && (
+            <Grid item xs={12}>
+              <Typography variant="subtitle1">Preview:</Typography>
+              <img
+                src={previewImage}
+                alt="Preview"
+                style={{ width: "100%", aspectRatio: "1/1" }}
+              />
+            </Grid>
+          )}
         </Grid>
       </Box>
     </Container>

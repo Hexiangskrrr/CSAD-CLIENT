@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import KitchenItem from "./OrderItem";
 import axios from "axios";
+import { Typography } from "@mui/material";
 
 function KitchenConsole() {
   const [orderList, setOrderList] = useState([]);
@@ -58,7 +59,7 @@ function KitchenConsole() {
 
   return (
     <div>
-      <h1>Kitchen Console</h1>
+      <Typography variant="h3" align="center">Kitchen Console</Typography>
       {kitchenItems}
     </div>
   );

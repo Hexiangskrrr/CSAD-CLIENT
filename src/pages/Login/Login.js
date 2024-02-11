@@ -8,6 +8,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import { ButtonGroup } from "@mui/material";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -73,8 +74,8 @@ const Login = () => {
   return (
     <div>
       {!userType ? (
-        <div
-          style={{
+        <Container
+          sx={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -82,21 +83,27 @@ const Login = () => {
             minHeight: "90vh",
           }}
         >
-          <div
-            style={{ display: "flex", alignItems: "center", padding: "20px" }}
-          >
+          <Box sx={{ display: "flex", alignItems: "center", padding: "20px" }}>
             <img src="/favicon-32x32.png" style={{ marginRight: "8px" }} />
-            <p>Delicious Food</p>
-          </div>
-
-          <Button onClick={() => setUserType("existing")}>Sign In</Button>
-          <Button onClick={() => setUserType("new")}>Sign Up</Button>
-          <Button onClick={continueAsGuest}>Continue As Guest</Button>
-        </div>
+            <Typography>Delicious Food</Typography>
+          </Box>
+          <ButtonGroup
+            orientation="vertical"
+            aria-label="Vertical button group"
+          >
+            <Button onClick={() => setUserType("existing")}>Sign In</Button>
+            <Button onClick={() => setUserType("new")}>Sign Up</Button>
+            <Button onClick={continueAsGuest}>Continue As Guest</Button>
+          </ButtonGroup>
+        </Container>
       ) : null}
 
       {userType === "existing" && (
-        <Container component="main" maxWidth="xs">
+        <Container component="main" maxWidth="xs" sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          height: '80vh'}}>
           <Typography variant="h5" align="center">
             Sign In
           </Typography>
@@ -145,7 +152,11 @@ const Login = () => {
       )}
 
       {userType === "new" && (
-        <Container component="main" maxWidth="xs">
+        <Container component="main" maxWidth="xs" sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          height: '80vh'}}>
           <Typography variant="h5" align="center">
             Sign Up
           </Typography>
@@ -204,12 +215,14 @@ const Login = () => {
           {signUpError && <p>Incorrect or password</p>}
         </Container>
       )}
-      <footer>
-        <p>Delicious Food Pte Ltd</p>
-        <a href="http://localhost:3000/about">about</a>
-        <a href="http://localhost:3000/admin">admin</a>
-        <a href="http://localhost:3000/kitchen">kitcheb</a>
-      </footer>
+      <Box sx={{ position: "fixed", bottom: 0, left: 0 }}>
+        <Typography sx={{ml:"5px"}}>Delicious Food Pte Ltd</Typography>
+        <ButtonGroup>
+        <Button href="http://localhost:3000/about">about</Button>
+        <Button href="http://localhost:3000/admin">admin</Button>
+        <Button href="http://localhost:3000/kitchen">kitchen</Button>
+        </ButtonGroup>
+      </Box>
     </div>
   );
 };
