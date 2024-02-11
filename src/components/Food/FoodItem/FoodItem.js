@@ -1,3 +1,4 @@
+import styles from "./FoodItem.module.css";
 import PureModal from "react-pure-modal";
 import "react-pure-modal/dist/react-pure-modal.min.css";
 import { useState } from "react";
@@ -15,7 +16,7 @@ const FoodItem = (props) => {
   };
 
   return (
-    <Card
+<Card
       component={Paper}
       sx={{
         display: "inline-block",
@@ -33,6 +34,7 @@ const FoodItem = (props) => {
       <Typography sx={{ fontWeight: "bold", color: "#ff5733" }}>
         ${props.price}
       </Typography>
+      <img src={props.imageUrl} alt={props.name} />
       <PureModal
         header={
           <Typography variant="h5" sx={{ fontWeight: "bold" }}>
@@ -67,6 +69,11 @@ const FoodItem = (props) => {
           {props.description}
         </Typography>
         <Typography sx={{ fontWeight: "bold" }}>${props.price}</Typography>
+        <img
+          src={props.imageUrl}
+          alt={props.name}
+          className={styles.modalImg}
+        />
       </PureModal>
     </Card>
   );

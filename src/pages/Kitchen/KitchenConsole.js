@@ -9,15 +9,19 @@ function KitchenConsole() {
   const SERVER_URL = "http://localhost:5003";
 
   useEffect(() => {
-    axios
-      .get(`${SERVER_URL}/orders`)
-      .then((response) => {
+    const fetchRealTimeData = async () => {
+      try {
+        const response = await axios.get(`${SERVER_URL}/realtime/orders`);
         setOrderList(response.data);
-        console.log(orderList);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
+      } catch (error) {
+        console.error("Error fetching real-time data:", error);
+      }
+    };
+    fetchRealTimeData();
+
+    const interval = setInterval(fetchRealTimeData, 5000);
+
+    return () => clearInterval(interval);
   }, []);
 
   const handleRemoveItem = (orderId) => {
