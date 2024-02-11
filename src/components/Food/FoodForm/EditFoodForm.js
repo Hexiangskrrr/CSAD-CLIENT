@@ -64,7 +64,7 @@ const EditFoodForm = (props) => {
   return (
     <Container maxWidth="xs">
       <Typography variant="h4" align="center" sx={{ mt: "4px" }}>
-        Edit
+        Edit Item
       </Typography>
       <Box onSubmit={handleSubmit} component="form">
         <Grid container spacing={2} alignItems="left">
@@ -136,7 +136,7 @@ const EditFoodForm = (props) => {
           </Grid>
           <Grid item xs={12}>
             <Button fullWidth type="submit" variant="contained">
-              Edit
+              Edit Item
             </Button>
           </Grid>
         </Grid>

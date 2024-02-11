@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Button from "@mui/material/Button";
+import { TextField, Typography } from "@mui/material";
+import { Box, Container } from "@mui/system";
 
 const AdminAuth = ({ onAdminAuth }) => {
   const navigate = useNavigate();
@@ -60,33 +63,59 @@ const AdminAuth = ({ onAdminAuth }) => {
   };
 
   return (
-    <div>
-      <h1>Admin Login</h1>
-      <form onSubmit={handleAdminLogin}>
-        Username:
-        <input
+    <Container
+      component="main"
+      maxWidth="xs"
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        height: "80vh",
+      }}
+    >
+      <Typography variant="h5" align="center">
+        Admin Login
+      </Typography>
+      <Box component="form" onSubmit={handleAdminLogin}>
+        <TextField
+          margin="normal"
+          fullWidth
           type="text"
           name="username"
+          label="Username:"
           onChange={(e) =>
             setAdminLoginData({ ...adminLoginData, username: e.target.value })
           }
-        ></input>
-        {isUsernameEmpty ? <span>Username cannot be empty</span> : null}
-        <br />
-        Password:
-        <input
+        ></TextField>
+        {isUsernameEmpty ? (
+          <Typography color={'red'}>Username cannot be empty</Typography>
+        ) : null}
+        <TextField
+          margin="normal"
+          fullWidth
           type="password"
           name="password"
+          label="Password:"
           onChange={(e) =>
             setAdminLoginData({ ...adminLoginData, password: e.target.value })
           }
-        ></input>
-        {isPasswordEmpty ? <span>Password cannot be empty</span> : null}
-        <br />
-        <input type="submit" value={"Log In"}></input>
-      </form>
-      {loginError ? <p>Incorrect username or password</p> : null}
-    </div>
+        ></TextField>
+        {isPasswordEmpty ? (
+          <Typography color={'red'}>Password cannot be empty</Typography>
+        ) : null}
+        <Button
+          fullWidth
+          variant="contained"
+          sx={{ mt: 3 }}
+          type="submit"
+        >
+          Log In
+        </Button>
+      </Box>
+      {loginError ? (
+        <Typography color={'red'}>Incorrect username or password</Typography>
+      ) : null}
+    </Container>
   );
 };
 

@@ -1,10 +1,10 @@
-import styles from "./FoodItem.module.css";
 import PureModal from "react-pure-modal";
 import "react-pure-modal/dist/react-pure-modal.min.css";
 import { useState } from "react";
-import { Button, Typography } from "@mui/material";
+import { Button, Card, Paper, Typography } from "@mui/material";
 import { useCart } from "react-use-cart";
 import AddIcon from "@mui/icons-material/Add";
+import { Box } from "@mui/system";
 
 const FoodItem = (props) => {
   const { addItem } = useCart();
@@ -15,10 +15,24 @@ const FoodItem = (props) => {
   };
 
   return (
-    <div className={styles.card} onClick={() => setModal(true)}>
-      <h3>{props.name}</h3>
-      <p>{props.category}</p>
-      <p className={styles.price}>${props.price}</p>
+    <Card
+      component={Paper}
+      sx={{
+        display: "inline-block",
+        width: "250px",
+        height: "400px",
+        margin: "10px",
+        padding: "15px",
+      }}
+      onClick={() => setModal(true)}
+    >
+      <Typography variant="h6" sx={{ fontWeight: "bold", mb: "8px" }}>
+        {props.name}
+      </Typography>
+      <Typography sx={{ mb: "12px" }}>{props.category}</Typography>
+      <Typography sx={{ fontWeight: "bold", color: "#ff5733" }}>
+        ${props.price}
+      </Typography>
       <PureModal
         header={
           <Typography variant="h5" sx={{ fontWeight: "bold" }}>
@@ -26,16 +40,20 @@ const FoodItem = (props) => {
           </Typography>
         }
         footer={
-          <div>
+          <Box>
             <Button
               variant="outlined"
               startIcon={<AddIcon />}
-              sx={{ backgroundColor: "white", color: "black" }}
+              sx={{
+                backgroundColor: "white",
+                color: "black",
+                borderColor: "black",
+              }}
               onClick={addOrder}
             >
               Add to Order
             </Button>
-          </div>
+          </Box>
         }
         isOpen={modal}
         closeButton="X"
@@ -43,12 +61,14 @@ const FoodItem = (props) => {
           setModal(false);
           return true;
         }}
-        width="auto"
+        width="30%"
       >
-        <div>{props.description}</div>
-        <div>${props.price}</div>
+        <Typography sx={{ wordWrap: "break-word" }}>
+          {props.description}
+        </Typography>
+        <Typography sx={{ fontWeight: "bold" }}>${props.price}</Typography>
       </PureModal>
-    </div>
+    </Card>
   );
 };
 

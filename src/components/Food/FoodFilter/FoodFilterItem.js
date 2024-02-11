@@ -1,3 +1,4 @@
+import { Card } from '@mui/material'
 import styles from './FoodFilterItem.module.css'
 
 const SelectionItem = (props) => {

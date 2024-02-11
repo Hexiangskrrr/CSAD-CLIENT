@@ -1,6 +1,8 @@
-import { Button } from '@mui/material';
+import { Button, Card } from '@mui/material';
 import React, { useState } from 'react';
 import axios from 'axios';
+import { CheckBox } from '@mui/icons-material';
+import { Box } from '@mui/system';
 
 const KitchenItem = (props) => {
 
@@ -37,7 +39,13 @@ const KitchenItem = (props) => {
   };
 
   return (
-    <div>
+    <Card sx={{
+      display: "inline-block",
+      width: "250px",
+      height: "350px",
+      margin: "10px",
+      padding: "15px",
+    }}>
       <div key={props.id}>
       <div>Order ID: {props.id}</div>
         <label key={props.id}>
@@ -45,7 +53,7 @@ const KitchenItem = (props) => {
           {props.checkboxData.map((item, index) => (
             <div key={index}>
               <input
-                type="checkbox"
+                type='checkbox'
                 checked={checkboxes[`checkbox${index + 1}`]}
                 onChange={() => handleCheckboxChange(index)}
               />
@@ -54,8 +62,10 @@ const KitchenItem = (props) => {
           ))}
         </label>
       </div>
-    <Button variant="contained" disabled={!ordercomplete()} onClick={handleRemoveItem}>Complete Order</Button>
-  </div>
+      <Box display="flex" justifyContent="center" mt={1}>
+    <Button variant="contained" sx={{align: "center"}} disabled={!ordercomplete()} onClick={handleRemoveItem}>Complete Order</Button>
+    </Box>
+  </Card>
 
   );
 }
