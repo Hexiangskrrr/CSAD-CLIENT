@@ -5,10 +5,10 @@ import styles from "./AvailableFood.module.css";
 import { useState, useEffect } from "react";
 
 const AvailableFood = () => {
-  const [selectedItem, setSelectedItem] = useState("Seasonal");
+  const [selectedItem, setSelectedItem] = useState("Promotion");
   const [foodList, setFoodList] = useState([]);
 
-  const selections = ["Seasonal", "Sushi", "Drinks", "Dessert"];
+  const selections = ["Promotion", "Sushi", "Drinks", "Dessert"];
 
   const SERVER_URL = "http://localhost:5003";
 

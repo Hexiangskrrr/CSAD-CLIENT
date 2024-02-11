@@ -141,7 +141,7 @@ const AddFoodForm = () => {
                   setFoodDetails({ ...foodDetails, category: e.target.value })
                 }
               >
-                <MenuItem value="Seasonal">Seasonal</MenuItem>
+                <MenuItem value="Promotion">Promotion</MenuItem>
                 <MenuItem value="Sushi">Sushi</MenuItem>
                 <MenuItem value="Drinks">Drinks</MenuItem>
                 <MenuItem value="Dessert">Dessert</MenuItem>
